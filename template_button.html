@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Button App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='template_button_style.css') }}">
+</head>
+
+<body>
+  <div id="app">
+    <!-- 検索と登録のメニューコンテナ -->
+    <div class="menu_container">
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search Templates">
+        <button id="search-button">検索</button>
+        <button id="template_toggleButton">登録</button>
+      </div>
+      <!-- 登録フォーム -->
+      <div id="template_container" class="hidden">
+        <div class="template-form">
+          <input type="text" id="title-input" placeholder="Title">
+          <textarea id="txt-input" placeholder="Template text"></textarea>
+          <button id="add-template">Add Template</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- テンプレート表示コンテナ -->
+    <div id="templates-container"></div>
+  </div>
+  <script src="{{ url_for('static', filename='template_button_script.js') }}"></script>
+</body>
+
+</html>
