@@ -42,7 +42,7 @@ body {
   flex: 2;
   font-size: 18pt;
   padding: 10px;
-  box-sizing: border-box;
+  width: 100px;
   /* 幅計算を正確に */
 }
 
