@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
           templateItems.forEach((item) => {
             item.addEventListener("click", () => {
               const textToCopy = item.dataset.txt;
-              copyToClipboard(textToCopy);
+              copyToClipboard(textToCopy, item);
             });
           });
         }
@@ -34,21 +34,21 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((error) => console.error("Error:", error));
   }
 
-  function copyToClipboard(text) {
+  function copyToClipboard(text, element) {
     if (navigator.clipboard) {
       navigator.clipboard
         .writeText(text)
-        .then(() => alert("Copied to clipboard!"))
+        .then(() => highlightElement(element))
         .catch((err) => {
           console.error("Clipboard error:", err);
-          fallbackCopyToClipboard(text);
+          fallbackCopyToClipboard(text, element);
         });
     } else {
-      fallbackCopyToClipboard(text);
+      fallbackCopyToClipboard(text, element);
     }
   }
 
-  function fallbackCopyToClipboard(text) {
+  function fallbackCopyToClipboard(text, element) {
     const textArea = document.createElement("textarea");
     textArea.value = text;
     textArea.style.position = "fixed"; // Prevent scrolling to bottom of the page
@@ -57,11 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
     textArea.select();
     try {
       document.execCommand("copy");
-      alert("Copied to clipboard!");
+      highlightElement(element);
     } catch (err) {
       console.error("Fallback copy failed:", err);
     }
     document.body.removeChild(textArea);
+  }
+
+  function highlightElement(element) {
+    const originalBackground = element.style.backgroundColor;
+    element.style.backgroundColor = "#333333";
+    setTimeout(() => {
+      element.style.backgroundColor = originalBackground;
+    }, 2000);
   }
 
   addTemplateButton.addEventListener("click", () => {
@@ -115,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             templateItems.forEach((item) => {
               item.addEventListener("click", () => {
                 const textToCopy = item.dataset.txt;
-                copyToClipboard(textToCopy);
+                copyToClipboard(textToCopy, item);
               });
             });
           } else {
