@@ -31,6 +31,8 @@ body {
   flex: 2;
   font-size: 18pt;
   padding: 10px;
+  width: 100px;
+  /* 幅計算を正確に */
 }
 
 #template_toggleButton,
@@ -108,7 +110,8 @@ body {
 .template-item {
   position: relative;
   width: 100%;
-  padding-top: 100%; /* 正方形を維持 */
+  padding-top: 100%;
+  /* 正方形を維持 */
   background-color: #fff;
   border: 1px solid #ddd;
   box-sizing: border-box;
