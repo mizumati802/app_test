@@ -1,20 +1,9 @@
-/* 全体のスタイル */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #f4f4f9;
   padding-top: 100px;
-  /* 固定メニューの高さ分の余白 */
   box-sizing: border-box;
-  /* 全体でbox-sizingを適用 */
-}
-
-.copy-template {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
 }
 
 /* 検索と登録のメニューコンテナ */
@@ -42,17 +31,15 @@ body {
   flex: 2;
   font-size: 18pt;
   padding: 10px;
-  width: 100px;
-  /* 幅計算を正確に */
 }
 
-#template_toggleButton, #search-button {
+#template_toggleButton,
+#search-button {
   flex: 1;
   font-size: 18pt;
   color: #ffffff;
   padding: 5px;
   box-sizing: border-box;
-  /* 幅計算を正確に */
 }
 
 #template_toggleButton {
@@ -71,7 +58,6 @@ body {
   padding: 15px;
   margin-top: 10px;
   box-sizing: border-box;
-  /* 幅計算を正確に */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -88,12 +74,9 @@ body {
 .template-form input,
 .template-form textarea {
   width: 100%;
-  /* 幅を100%に固定 */
   padding: 20px;
-  /* パディングを20pxに設定 */
   font-size: 20pt;
   box-sizing: border-box;
-  /* パディングを含めて幅を調整 */
 }
 
 .template-form textarea {
@@ -114,14 +97,58 @@ body {
   background-color: #0056b3;
 }
 
-/* テンプレートアイテム */
+/* テンプレートコンテナをグリッドに */
+#templates-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
 .template-item {
-  background: #fff;
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 正方形を維持 */
+  background-color: #fff;
   border: 1px solid #ddd;
-  padding: 15px;
-  margin: 10px auto;
-  width: calc(100% - 80px);
   box-sizing: border-box;
-  /* 幅計算を正確に */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.template-item p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+}
+
+/* 背景色の循環 */
+.template-item:nth-child(7n+1) {
+  background-color: red;
+}
+
+.template-item:nth-child(7n+2) {
+  background-color: blue;
+}
+
+.template-item:nth-child(7n+3) {
+  background-color: yellowgreen;
+}
+
+.template-item:nth-child(7n+4) {
+  background-color: purple;
+}
+
+.template-item:nth-child(7n+5) {
+  background-color: brown;
+}
+
+.template-item:nth-child(7n+6) {
+  background-color: pink;
+}
+
+.template-item:nth-child(7n+7) {
+  background-color: gray;
 }

@@ -12,14 +12,12 @@
 
 <body>
   <div id="app">
-    <!-- 検索と登録のメニューコンテナ -->
     <div class="menu_container">
       <div class="search-container">
         <input type="text" id="search-input" placeholder="Search Templates">
         <button id="search-button">検索</button>
         <button id="template_toggleButton">登録</button>
       </div>
-      <!-- 登録フォーム -->
       <div id="template_container" class="hidden">
         <div class="template-form">
           <input type="text" id="title-input" placeholder="Title">
@@ -29,8 +27,29 @@
       </div>
     </div>
 
-    <!-- テンプレート表示コンテナ -->
-    <div id="templates-container"></div>
+    <div id="templates-container">
+      <div class="template-item">
+        <p>Template 1</p>
+      </div>
+      <div class="template-item">
+        <p>Template 2</p>
+      </div>
+      <div class="template-item">
+        <p>Template 3</p>
+      </div>
+      <div class="template-item">
+        <p>Template 4</p>
+      </div>
+      <div class="template-item">
+        <p>Template 5</p>
+      </div>
+      <div class="template-item">
+        <p>Template 6</p>
+      </div>
+      <div class="template-item">
+        <p>Template 7</p>
+      </div>
+    </div>
   </div>
   <script src="{{ url_for('static', filename='template_button_script.js') }}"></script>
   <script src="https://mizumati802.github.io/app_test/template_button_script.js"></script>
