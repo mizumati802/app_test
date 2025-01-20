@@ -153,3 +153,9 @@ function generateRandomProductNumber() {
   existingProductNumbers.add(randomNumber);
   return randomNumber;
 }
+
+
+document.getElementById("clip_toggleButton").addEventListener("click", function () {
+  const clipContainer = document.getElementById("clip_container");
+  clipContainer.classList.toggle("hidden");
+});

@@ -10,29 +10,180 @@
 
 <body>
   <div id="app">
-    <h1>Clips</h1>
-
-    <!-- クリップボードリスト -->
-    <div id="clip-list">
-      <!-- 検索バー -->
+    <!-- 検索と登録のメニューコンテナ -->
+    <div class="menu_container">
       <div class="search-container">
         <input type="text" id="search-input" placeholder="Search Clips">
         <button id="search-button">Search</button>
+        <button id="clip_toggleButton">登録</button>
       </div>
-
-      <!-- クリップ表示コンテナ -->
-      <div id="clips-container"></div>
+      <!-- 登録フォーム -->
+      <div id="clip_container" class="hidden">
+        <div class="clip-form">
+          <input type="text" id="title-input" placeholder="Title">
+          <textarea id="txt-input" placeholder="Clip text"></textarea>
+          <button id="add-clip">Add Clip</button>
+        </div>
+      </div>
     </div>
 
-    <!-- クリップ追加フォーム -->
-    <div class="clip-form">
-      <input type="text" id="title-input" placeholder="Title">
-      <textarea id="txt-input" placeholder="Clip text"></textarea>
-      <button id="add-clip">Add Clip</button>
+    <!-- クリップ表示コンテナ -->
+    <div id="clips-container">
+      <!-- ダミーデータ -->
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
+      <div class="clip-item">
+        <p>test</p>
+      </div>
     </div>
   </div>
 
-  <link rel="script" href="/clip/clip_script.js">
+  <script src="/clip/clip_script.js"></script>
 </body>
 
 </html>

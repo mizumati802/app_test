@@ -1,47 +1,12 @@
+/* 全体のスタイル */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #f4f4f9;
-}
-
-h1 {
-  text-align: center;
-}
-
-textarea, input {
-  display: block;
-  width: calc(100% - 80px);
-  margin: 10px auto;
-  padding: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin: 10px auto;
-}
-
-button:hover {
-  background: #0056b3;
-}
-
-#clip-list {
-  width: 50%;
-  margin: 20px auto;
-  background: #fff;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.clip {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  background: #fff;
+  padding-top: 100px;
+  /* 固定メニューの高さ分の余白 */
+  box-sizing: border-box;
+  /* 全体でbox-sizingを適用 */
 }
 
 .copy-clip {
@@ -52,6 +17,111 @@ button:hover {
   cursor: pointer;
 }
 
-.copy-clip:hover {
-  background-color: #218838;
+/* 検索と登録のメニューコンテナ */
+.menu_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 1001;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 0 20px;
+}
+
+#search-input {
+  flex: 2;
+  font-size: 18pt;
+  padding: 10px;
+  box-sizing: border-box;
+  /* 幅計算を正確に */
+}
+
+#clip_toggleButton, #search-button {
+  flex: 1;
+  font-size: 18pt;
+  color: #ffffff;
+  padding: 5px;
+  box-sizing: border-box;
+  /* 幅計算を正確に */
+}
+
+#clip_toggleButton {
+  background-color: #245284;
+}
+
+#search-button {
+  background-color: #248449;
+}
+
+/* 登録フォーム */
+#clip_container {
+  width: 100%;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  /* 幅計算を正確に */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+.clip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.clip-form input,
+.clip-form textarea {
+  width: 100%;
+  /* 幅を100%に固定 */
+  padding: 20px;
+  /* パディングを20pxに設定 */
+  font-size: 20pt;
+  box-sizing: border-box;
+  /* パディングを含めて幅を調整 */
+}
+
+.clip-form textarea {
+  resize: vertical;
+}
+
+.clip-form button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.clip-form button:hover {
+  background-color: #0056b3;
+}
+
+/* クリップアイテム */
+.clip-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px auto;
+  width: calc(100% - 80px);
+  box-sizing: border-box;
+  /* 幅計算を正確に */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
