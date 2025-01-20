@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f9;
+}
+
+h1 {
+  text-align: center;
+}
+
+textarea, input {
+  display: block;
+  width: calc(100% - 80px);
+  margin: 10px auto;
+  padding: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin: 10px auto;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+#clip-list {
+  width: 50%;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.clip {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.copy-clip {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.copy-clip:hover {
+  background-color: #218838;
+}

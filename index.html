@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .link {
+            margin: 5px 0;
+        }
+        .link a {
+            color: blue;
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Link Generator</h1>
+    <p>Enter the URL path below to generate links:</p>
+    <input type="text" id="pathInput" placeholder="Enter path, e.g., dir1/dir2" style="width: 80%; padding: 8px;">
+    <button id="generateButton" style="padding: 8px 16px;">Generate Links</button>
+
+    <div id="output" style="margin-top: 20px;"></div>
+
+    <script>
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const baseUrl = 'https://mizumati802.github.io/test_git/';
+            const input = document.getElementById('pathInput').value.trim();
+            const outputDiv = document.getElementById('output');
+
+            // Clear previous output
+            outputDiv.innerHTML = '';
+
+            if (!input) {
+                outputDiv.innerHTML = '<p style="color: red;">Please enter a valid path.</p>';
+                return;
+            }
+
+            const parts = input.split('/');
+            let currentPath = '';
+            
+            parts.forEach(part => {
+                currentPath += part + '/';
+                const link = baseUrl + currentPath;
+                
+                const linkElement = document.createElement('div');
+                linkElement.className = 'link';
+                linkElement.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+                outputDiv.appendChild(linkElement);
+            });
+        });
+    </script>
+</body>
+
+</html>

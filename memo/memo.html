@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='memo_style.css') }}">
+  <link rel="stylesheet" href="static/memo_style.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- トグルボタン -->
+    <button id="toggle-note-list">Show Notes</button>
+
+    <!-- ノートリスト (初期は非表示) -->
+    <div id="note-list" class="hidden">
+      
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search Notes">
+        <button id="search-button">Search</button>
+        <button id="close-note-list">Close</button>
+        
+      </div>
+
+      <!-- ノートの表示コンテナ -->
+      <div id="notes-container">
+        <div class="note">
+          <h3>テスト</h3>
+          <p>    font-family: Arial, sans-serif;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 10px;
+            z-index: 1001;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;    font-family: Arial, sans-serif;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 10px;
+            z-index: 1001;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;    font-family: Arial, sans-serif;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 10px;
+            z-index: 1001;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>テスト</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+        <div class="note">
+          <h3>からあげ</h3>
+          <p>テスト</p>
+          <button class="delete-note" data-id="5">Delete</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ノート追加フォーム -->
+    <div class="note-form">
+      <input type="text" id="title-input" placeholder="Title">
+      <textarea id="txt-input" placeholder="Note text"></textarea>
+      <button id="add-note">Add</button>
+      <button id="save-note"> Save</button>
+      <button id="clear-note"> Clear</button>
+    </div>
+  </div>
+
+  <!-- JavaScriptファイルをリンク -->
+  <!-----------<script src="static/memo_script.css"></script> ---->
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+/* 全体のスタイル */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f9;
+}
+
+h1 {
+  text-align: center;
+}
+
+textarea, input {
+  display: block;
+  width: calc(100% - 80px);
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 18pt;
+}
+
+textarea {
+  height: 360px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* トグルボタンと Add Note ボタンの共通スタイル */
+#toggle-note-list, #add-note, #save-note, #clear-note {
+  font-size: 18pt;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#save-note {
+  background-color: #148605;
+}
+
+#clear-note {
+  background-color: #3d0586;
+}
+
+
+/* 隠し状態 */
+.hidden {
+  display: none;
+}
+
+/* ノートリスト全体のスタイル */
+#note-list {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 90vh;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* クローズボタンを右上に絶対配置 */
+#close-note-list {
+  position: absolute;
+  top: -60px;
+  right: 10px;
+  padding: 10px;
+  background: #ff5c5c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#close-note-list:hover {
+  background: #e04e4e;
+}
+
+/* 検索コンテナを固定 */
+.search-container {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 10px;
+  z-index: 1001;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+}
+
+/* ノート表示コンテナ */
+#notes-container {
+  height: calc(90vh - 156px);
+  overflow-y: auto;
+  padding-top: 10px;
+}
+
+.note {
+  position: relative;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 30px;
+  margin-bottom: 10px;
+  font-size: 12pt;
+}
+
+/* ノート内の <p> 要素 */
+.note p {
+  margin-right: 80px;
+}
+
+/* 削除ボタン */
+.delete-note {
+  position: absolute;
+  right: 30px;
+  bottom: 10px;
+  background-color: #ff5c5c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-note:hover {
+  background-color: #e04e4e;
+}

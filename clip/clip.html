@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clip App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='clip_style.css') }}">
+</head>
+
+<body>
+  <div id="app">
+    <h1>Clips</h1>
+
+    <!-- クリップボードリスト -->
+    <div id="clip-list">
+      <!-- 検索バー -->
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search Clips">
+        <button id="search-button">Search</button>
+      </div>
+
+      <!-- クリップ表示コンテナ -->
+      <div id="clips-container"></div>
+    </div>
+
+    <!-- クリップ追加フォーム -->
+    <div class="clip-form">
+      <input type="text" id="title-input" placeholder="Title">
+      <textarea id="txt-input" placeholder="Clip text"></textarea>
+      <button id="add-clip">Add Clip</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='clip_script.js') }}"></script>
+</body>
+
+</html>
