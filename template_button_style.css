@@ -129,29 +129,29 @@ body {
 
 /* 背景色の循環 */
 .template-item:nth-child(7n+1) {
-  background-color: red;
+  background-color: #b20000; /* 元の赤より暗い */
 }
 
 .template-item:nth-child(7n+2) {
-  background-color: blue;
+  background-color: #0000b2; /* 元の青より暗い */
 }
 
 .template-item:nth-child(7n+3) {
-  background-color: yellowgreen;
+  background-color: #3b8052; /* 元の黄緑より暗い */
 }
 
 .template-item:nth-child(7n+4) {
-  background-color: purple;
+  background-color: #4b0082; /* 元の紫より暗い */
 }
 
 .template-item:nth-child(7n+5) {
-  background-color: brown;
+  background-color: #5c4033; /* 元の茶色より暗い */
 }
 
 .template-item:nth-child(7n+6) {
-  background-color: pink;
+  background-color: #d87093; /* 元のピンクより暗い */
 }
 
 .template-item:nth-child(7n+7) {
-  background-color: gray;
+  background-color: #505050; /* 元のグレーより暗い */
 }
