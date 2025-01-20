@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button URL App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_style.css') }}">
+  <link rel="stylesheet" href="/dashboard_style.css">
+  <link rel="stylesheet" href="https://mizumati802.github.io/app_test/dashboard_style.css">
+
+  <!-----
+  <link rel="stylesheet" href="/static/style.css">
+  ----->
+
+</head>
+
+<body>
+  <div id="app">
+    <!-- Top Display Section -->
+    <div id="display-zone" style="height: 200px;">
+      <!-- Display current sequence and titles dynamically -->
+    </div>
+
+    <!-- Button Section -->
+    <div id="button-section" style="position: fixed; bottom: 20px; right: 20px;">
+      <div id="buttons" style="display: grid; gap: 20px; width: 300px; height: 300px;">
+        <button class="color-btn number-button" data-number="1" id="btn-1">1</button>
+        <button class="color-btn number-button" data-number="2" id="btn-2">2</button>
+        <button class="color-btn number-button" data-number="3" id="btn-3">3</button>
+        <button class="color-btn number-button" data-number="4" id="btn-4">4</button>
+      </div>
+
+      <!-- Submit Button -->
+      <button id="submit-button" style="margin-top: 20px; width: 200px; height: 60px;">送信</button>
+    </div>
+
+    <!-- Settings Button -->
+    <button id="settings-button" style="position: absolute; top: 20px; left: 20px;">設定</button>
+
+    <!-- Settings Popup -->
+    <div id="setting-popup"
+      style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+      <h2>設定</h2>
+      <label for="sequence-input">数字の組み合わせ:</label>
+      <input type="text" id="sequence-input"><br>
+      <label for="name-input">タイトル:</label>
+      <input type="text" id="name-input"><br>
+      <label for="url-input">URL:</label>
+      <input type="text" id="url-input"><br>
+      <button id="register-button">登録</button>
+      <button id="close-popup" style="margin-left: 10px;">閉じる</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='dashboard_script.js') }}"></script>
+  <script src="https://mizumati802.github.io/app_test/dashboard_script.js"></script>
+  <script src="/dashboard_script.js"></script>
+  <script src="https://mizumati802.github.io/app_test/dashboard_script.js"></script>
+  <!-----
+  <script src="/static/dashboard_script.js"></script>
+  ----->
+</body>
+
+</html>

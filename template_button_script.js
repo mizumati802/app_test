@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="template-item" data-id="${template.id}" data-txt="${template.txt}">
                 <h3>${template.title}</h3>
                 <p>${template.txt}</p>
+                <button class="delete-template-button">削除</button>
               </div>
               `
             )
@@ -24,11 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const templateItems = document.querySelectorAll(".template-item");
           templateItems.forEach((item) => {
+            const deleteButton = item.querySelector(".delete-template-button");
+            deleteButton.addEventListener("click", () => {
+              const templateId = item.dataset.id;
+              deleteTemplate(templateId, item);
+            });
+
             item.addEventListener("click", () => {
               const textToCopy = item.dataset.txt;
               copyToClipboard(textToCopy, item);
             });
           });
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function deleteTemplate(templateId, element) {
+    fetch(`/delete_template/${templateId}`, { method: "DELETE" })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          element.remove();
+        } else {
+          alert(data.message);
         }
       })
       .catch((error) => console.error("Error:", error));
@@ -51,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function fallbackCopyToClipboard(text, element) {
     const textArea = document.createElement("textarea");
     textArea.value = text;
-    textArea.style.position = "fixed"; // Prevent scrolling to bottom of the page
+    textArea.style.position = "fixed";
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
@@ -114,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="template-item" data-id="${template.id}" data-txt="${template.txt}">
                   <h3>${template.title}</h3>
                   <p>${template.txt}</p>
+                  <button class="delete-template-button">削除</button>
                 </div>
                 `
               )
@@ -121,6 +142,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const templateItems = document.querySelectorAll(".template-item");
             templateItems.forEach((item) => {
+              const deleteButton = item.querySelector(".delete-template-button");
+              deleteButton.addEventListener("click", () => {
+                const templateId = item.dataset.id;
+                deleteTemplate(templateId, item);
+              });
+
               item.addEventListener("click", () => {
                 const textToCopy = item.dataset.txt;
                 copyToClipboard(textToCopy, item);
