@@ -192,16 +192,27 @@ document.querySelectorAll(".number-button").forEach((button) => {
 });
 
 
-function openAndCloseWindow() {
-  // 新しいウィンドウを開く
-  const newWindow = window.open("https://www.mercari.com/jp/", "_blank");
-  if (newWindow) {
-      // 0.5秒後に新しいウィンドウを閉じる
+function openAndHandleWindows() {
+  // 新しいウィンドウを開く（指定URL）
+  const externalWindow = window.open("https://www.mercari.com/jp/", "_blank");
+
+  if (externalWindow) {
+      // 0.5秒後に外部ウィンドウを閉じる
       setTimeout(() => {
-          newWindow.close();
+          externalWindow.close();
       }, 500);
-      // 現在のウィンドウを閉じる
-      window.close();
+
+      // 現在のウィンドウをスクリプトで開きなおす
+      const currentWindow = window.open(location.href, "_self");
+
+      if (currentWindow) {
+          // 1秒後に現在のウィンドウを閉じる
+          setTimeout(() => {
+              currentWindow.close();
+          }, 1000);
+      } else {
+          alert("現在のウィンドウを再開することがブロックされています。ポップアップを許可してください。");
+      }
   } else {
       alert("新しいウィンドウを開くことがブロックされています。ポップアップを許可してください。");
   }
