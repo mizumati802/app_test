@@ -5,6 +5,19 @@ const settingButton = document.querySelector("#settings-button");
 const displayZone = document.querySelector("#display-zone");
 let currentSequence = "";
 
+function openOrReuseWindow() {
+  const url = 'https://database-app-6ms4.onrender.com/dashboard';
+  const windowName = 'myUniqueWindow';
+
+  const win = window.open(url, windowName);
+  if (win) {
+      win.focus();
+  } else {
+      // フォールバック: window.open が失敗した場合に直接遷移
+      window.location.href = url;
+  }
+}
+
 // ボタンが押されたときの処理
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -200,7 +213,7 @@ function openAndCloseWindow() {
     // 0.5秒後に外部ウィンドウを閉じる
     setTimeout(() => {
       externalWindow.close();
-    }, 500);
+      }, 500);
 
     // 0.1秒後に現在のタブも閉じる
     setTimeout(() => {
