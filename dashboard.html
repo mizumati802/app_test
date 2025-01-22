@@ -24,33 +24,39 @@
     <div id="display-zone">
       <!-- Display current sequence and titles dynamically -->
     </div>
-    <div id="button-section">
-      <!-- Side Buttons -->
-      <div id="side_buttons">
-        <a href="//youtube.com" target="_blank" class="button">
-          <button class="color-btn" id="btn-1">yu</button>
-        </a>
-        <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
-        <button class="color-btn" id="btn-3">3</button>
-        <button class="color-btn" id="btn-4">4</button>
-      </div>
-    
-      <!-- Top Buttons -->
-      <div id="top_buttons">
-        <button class="color-btn reload-btn" id="reload-button">Reload</button>
-        <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
-        <button class="color-btn" id="btn-3">3</button>
-        <button class="color-btn" id="btn-4">4</button>
-      </div>
-    
-      <!-- Main Buttons -->
-      <div id="buttons">
-        <button class="color-btn number-button" data-number="1" id="btn-1">1</button>
-        <button class="color-btn number-button" data-number="2" id="btn-2">2</button>
-        <button class="color-btn number-button" data-number="3" id="btn-3">3</button>
-        <button class="color-btn number-button" data-number="4" id="btn-4">4</button>
-        <button id="submit-button">送信</button>
-        <button onclick="mercariopenWindow()" id="mercari_button">メル</button>
+    <div class="button_container">      
+      <div id="button-section">
+        <!-- Side Buttons -->
+        <div id="side_buttons">
+          <a href="//youtube.com" target="_blank" class="button">
+            <button class="color-btn" id="btn-1">yu</button>
+          </a>
+          <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
+          <button class="color-btn" id="btn-3">3</button>
+          <button class="color-btn" id="btn-4">4</button>
+        </div>
+      
+        <!-- Top Buttons -->
+        <div id="top_buttons">
+          <button class="color-btn reload-btn" id="reload-button">Re</button>
+          <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
+          <button class="color-btn" id="btn-3">3</button>
+          <button class="color-btn" id="btn-4">4</button>
+        </div>
+      
+        <!-- Main Buttons -->
+        <div id="buttons">
+          <button class="color-btn number-button" data-number="1" id="btn-1">1</button>
+          <button class="color-btn number-button" data-number="2" id="btn-2">2</button>
+          <button class="color-btn number-button" data-number="3" id="btn-3">3</button>
+          <button class="color-btn number-button" data-number="4" id="btn-4">4</button>
+          <div id="submit_button_Section">
+            <button id="submit-button">送信</button>
+          </div>
+          <div id="mercari_button_Section">   
+            <button onclick="mercariopenWindow()" id="mercari_button">メル</button>
+          </div>
+        </div>
       </div>
     </div>
     
