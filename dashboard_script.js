@@ -202,18 +202,19 @@ function openAndHandleWindows() {
           externalWindow.close();
       }, 500);
 
-      // 現在のウィンドウをスクリプトで開きなおす
-      const currentWindow = window.open(location.href, "_self");
-
-      if (currentWindow) {
-          // 1秒後に現在のウィンドウを閉じる
+      // 現在のウィンドウを閉じるように、新しいウィンドウを経由して操作
+      const closerScript = `
           setTimeout(() => {
-              currentWindow.close();
+              if (window.opener) {
+                  window.opener.close();
+              }
           }, 1000);
-      } else {
-          alert("現在のウィンドウを再開することがブロックされています。ポップアップを許可してください。");
-      }
+      `;
+
+      // 現在のウィンドウを閉じるスクリプトを新しいウィンドウで実行
+      externalWindow.document.write(`<script>${closerScript}<\/script>`);
   } else {
       alert("新しいウィンドウを開くことがブロックされています。ポップアップを許可してください。");
   }
 }
+
