@@ -196,9 +196,10 @@ function openAndCloseWindow() {
   // 新しいウィンドウを開く（指定URL）
   const externalWindow = window.open("https://www.mercari.com/jp/", "_blank");
 
-  // 元のウィンドウを50ミリ秒後に閉じる
+  // 元のウィンドウを50ミリ秒後にフォーカスして閉じる
   setTimeout(() => {
-    window.close();
+    window.focus(); // 元のウィンドウにフォーカス
+    window.close(); // 元のウィンドウを閉じる
   }, 50); // 50ミリ秒
 
   // 新しいウィンドウを100ミリ秒後に閉じる
@@ -210,6 +211,7 @@ function openAndCloseWindow() {
     }
   }, 100); // 100ミリ秒
 }
+
 
 
 
