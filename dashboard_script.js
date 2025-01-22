@@ -196,16 +196,18 @@ function openAndCloseWindow() {
   // 新しいウィンドウを開く（指定URL）
   const externalWindow = window.open("https://www.mercari.com/jp/", "_blank");
 
-  // ウィンドウを0.1秒（100ミリ秒）後に閉じる
+  // 元のウィンドウを50ミリ秒後に閉じる
+  setTimeout(() => {
+    window.close();
+  }, 50); // 50ミリ秒
+
+  // 新しいウィンドウを100ミリ秒後に閉じる
   setTimeout(() => {
     if (externalWindow) {
       externalWindow.close(); // 新しいウィンドウを閉じる
     } else {
       console.log("新しいウィンドウを開けませんでした（ポップアップがブロックされた可能性があります）。");
     }
-
-    // 元のウィンドウを閉じる
-    window.close();
   }, 100); // 100ミリ秒
 }
 
