@@ -233,3 +233,26 @@ document.getElementById('Reload-button').addEventListener('click', function() {
   location.reload(); // 画面をリロードする
 });
 
+
+
+
+// 入力フィールドとcurrentSequenceをクリアする関数
+function clearInputs() {
+  currentSequence = "";
+  document.querySelectorAll("input").forEach((input) => {
+    input.value = "";
+  });
+  
+  // id="display-zone"の子要素を削除
+  const displayZone = document.getElementById("display-zone");
+  while (displayZone.firstChild) {
+    displayZone.removeChild(displayZone.firstChild);
+  }
+
+  updateDisplay();
+}
+
+
+    // ボタンにクリックイベントを設定
+    document.getElementById("clear-button").addEventListener("click", clearInputs);
+
