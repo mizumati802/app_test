@@ -75,7 +75,6 @@ body {
   left: 50%;
   /* 左右の中央揃え */
   transform: translate(-50%, -50%) scale(0.8);
-  font-size: 20pt;
   /* フォントサイズを大きく設定 */
 }
 
@@ -88,10 +87,11 @@ body {
   /* ボタン間の余白 */
   align-content: start;
   /* ボタンが上詰めになるように配置 */
+  font-size: 20pt;
 }
 
 #side_buttons button {
-  font-size: 16pt;
+  font-size: 24pt;
   padding: 16px;
   color: #fff;
   border: none;
@@ -143,7 +143,7 @@ body {
 
 
 #top_buttons button {
-  font-size: 16pt;
+  font-size: 24pt;
   padding: 16px;
   color: #fff;
   border: none;
@@ -206,6 +206,7 @@ body {
   cursor: pointer;
   color: #fff;
   text-align: center;
+  font-size: 32pt;
 }
 
 #btn-1 {
@@ -258,6 +259,8 @@ body {
   width: 100%;
   font-size: inherit;
   border: none;
+  padding: 10px;
+  font-size: 20pt;
 }
 
 #submit-button:hover {
@@ -270,7 +273,8 @@ body {
   font-size: inherit;
   border: none;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
+  font-size: 20pt;
 }
 
 #mercari_button:hover {
