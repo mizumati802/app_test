@@ -71,7 +71,7 @@ body {
   max-width: 400px;
   aspect-ratio: 1 / 1;
   position: absolute;
-  top: 280px;
+  top: 220px;
   left: 50%;
   /* 左右の中央揃え */
   transform: translate(-50%, -50%) scale(0.8);
