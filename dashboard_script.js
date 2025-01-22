@@ -192,20 +192,43 @@ document.querySelectorAll(".number-button").forEach((button) => {
   });
 });
 
-
 function openAndCloseWindow() {
-  // 新しいウィンドウを開く（指定URL）
-  const externalWindow = window.open("https://www.mercari.com/jp/", "_blank");
+  // 新しいウィンドウを開く（指定URLを設定）
+  const newWindow = window.open("about:blank", "_blank");
 
-  // ウィンドウを0.1秒（100ミリ秒）後に閉じる
-  setTimeout(() => {
-    if (externalWindow) {
-      externalWindow.close();
-    } else {
-      console.log("ウィンドウを開けませんでした（ポップアップがブロックされた可能性があります）。");
-    }
-  }, 100); // 100ミリ秒
+  // 新しいウィンドウにURLを設定し、条件に応じて処理を分岐
+  Promise.resolve({ url: "https://www.mercari.com/jp/" }) // 仮のデータ取得Promise
+    .then((data) => {
+      if (data.url) {
+        // 新しいウィンドウにURLを設定
+        if (newWindow) {
+          newWindow.location.href = data.url;
+
+          // 0.1秒後に新しいウィンドウを閉じる
+          setTimeout(() => {
+            newWindow.close();
+          }, 100);
+        } else {
+          console.log("新しいウィンドウを開けませんでした（ポップアップがブロックされた可能性があります）。");
+        }
+
+        // 元のウィンドウも閉じる
+        setTimeout(() => {
+          window.close();
+        }, 200); // 適宜遅延を設定（ここでは0.2秒後）
+      } else {
+        // URLがない場合は新しいウィンドウを閉じ、アラートを表示
+        if (newWindow) newWindow.close();
+        alert("該当するURLがありません");
+      }
+    })
+    .catch((err) => {
+      console.error("エラー:", err);
+      if (newWindow) newWindow.close(); // エラー時にも新しいウィンドウを閉じる
+      alert("エラーが発生しました");
+    });
 }
+
 
 
 
