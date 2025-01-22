@@ -208,16 +208,7 @@ function mercariopenWindow() {
 }
 function gptopenWindow() {
   // 新しいウィンドウを開く（指定URL）
-  const externalWindow = window.open("https://chat.openai.com/", "_blank");
-
-  // ウィンドウを0.1秒（100ミリ秒）後に閉じる
-  setTimeout(() => {
-    if (externalWindow) {
-      externalWindow.close();
-    } else {
-      console.log("ウィンドウを開けませんでした（ポップアップがブロックされた可能性があります）。");
-    }
-  }, 100); // 100ミリ秒
+  window.location.href = "gpt.com";
 }
 
 
