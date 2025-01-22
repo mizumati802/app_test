@@ -195,7 +195,7 @@ document.querySelectorAll(".number-button").forEach((button) => {
 
 function mercariopenWindow() {
   // 新しいウィンドウを開く（指定URL）
-  const externalWindow = window.open("youtube://", "_blank");
+  const externalWindow = window.open("youtube.com", "_blank");
 
   // ウィンドウを0.1秒（100ミリ秒）後に閉じる
   setTimeout(() => {
