@@ -39,9 +39,9 @@ body {
   justify-content: right;
   font-size: 18px;
   font-weight: bold;
-  overflow: auto;
-  max-height: 200px;
+  overflow: hidden; /* 背景の余分な領域を隠す */
   width: 100%;
+  min-height: 200px; /* 高さが足りない場合に備えて追加 */
 }
 
 /* 親要素 */
