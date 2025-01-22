@@ -5,18 +5,6 @@ const settingButton = document.querySelector("#settings-button");
 const displayZone = document.querySelector("#display-zone");
 let currentSequence = "";
 
-function openOrReuseWindow() {
-  const url = 'https://database-app-6ms4.onrender.com/dashboard';
-  const windowName = 'myUniqueWindow';
-
-  const win = window.open(url, windowName);
-  if (win) {
-      win.focus();
-  } else {
-      // フォールバック: window.open が失敗した場合に直接遷移
-      window.location.href = url;
-  }
-}
 
 // ボタンが押されたときの処理
 buttons.forEach((button) => {
@@ -209,19 +197,15 @@ function openAndCloseWindow() {
   // 新しいウィンドウを開く（指定URL）
   const externalWindow = window.open("https://www.mercari.com/jp/", "_blank");
 
-  if (externalWindow) {
-    // 0.5秒後に外部ウィンドウを閉じる
-    setTimeout(() => {
+  // ウィンドウを0.1秒（100ミリ秒）後に閉じる
+  setTimeout(() => {
+    if (externalWindow) {
       externalWindow.close();
-      }, 500);
-
-    // 0.1秒後に現在のタブも閉じる
-    setTimeout(() => {
-      window.close();
-    }, 100);
-  } else {
-    console.log("ウィンドウを開くことができませんでした。ポップアップがブロックされている可能性があります。");
-  }
+    } else {
+      console.log("ウィンドウを開けませんでした（ポップアップがブロックされた可能性があります）。");
+    }
+  }, 100); // 100ミリ秒
 }
+
 
 
