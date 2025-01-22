@@ -206,9 +206,6 @@ function mercariopenWindow() {
     }
   }, 100); // 100ミリ秒
 }
-function gptopenWindow() {
-  // 新しいウィンドウを開く（指定URL）
-  const externalWindow = window.open("shortcuts://run-shortcut?name=gpt_open", "_blank");
 
   // ウィンドウを0.1秒（100ミリ秒）後に閉じる
   setTimeout(() => {
@@ -218,7 +215,14 @@ function gptopenWindow() {
       console.log("ウィンドウを開けませんでした（ポップアップがブロックされた可能性があります）。");
     }
   }, 100); // 100ミリ秒
+
+
+
+function gptopenWindow() {
+  const url = "chatgpt://example"; // chatgpt:// スキーム付きのURL
+  window.location.href = url;
+  setTimeout(() => {
+    window.close();
+  }, 500);
 }
-
-
 
