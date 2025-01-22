@@ -190,3 +190,19 @@ document.querySelectorAll(".number-button").forEach((button) => {
     }
   });
 });
+
+
+function openAndCloseWindow() {
+  // 新しいウィンドウを開く
+  const newWindow = window.open("https://www.mercari.com/jp/", "_blank");
+  if (newWindow) {
+      // 0.5秒後に新しいウィンドウを閉じる
+      setTimeout(() => {
+          newWindow.close();
+      }, 500);
+      // 現在のウィンドウを閉じる
+      window.close();
+  } else {
+      alert("新しいウィンドウを開くことがブロックされています。ポップアップを許可してください。");
+  }
+}

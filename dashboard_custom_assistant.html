@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Custom Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_custom_assistant_style.css') }}">
+  <link rel="stylesheet" href="/dashboard_custom_assistant_style.css">
+  <link rel="stylesheet" href="https://mizumati802.github.io/app_test/dashboard_custom_assistant_style.css">
+</head>
+
+<body>
+  <div id="dashboard_custom_assistant_app">
+    <!-- 検索と登録のメニューコンテナ -->
+    <div class="dashboard_custom_assistant_menu_container">
+      <div class="dashboard_custom_assistant_search-container">
+        <input type="text" id="dashboard_custom_assistant_search-input" placeholder="Search Clips">
+        <button id="dashboard_custom_assistant_search-button">検索</button>
+        <button id="dashboard_custom_assistant_toggleButton">登録</button>
+      </div>
+      <!-- 登録フォーム -->
+      <div id="dashboard_custom_assistant_container" class="dashboard_custom_assistant_hidden">
+        <div class="dashboard_custom_assistant_clip-form">
+          <input type="text" id="dashboard_custom_assistant_title-input" placeholder="Title">
+          <textarea id="dashboard_custom_assistant_txt-input" placeholder="Clip text"></textarea>
+          <button id="dashboard_custom_assistant_add-clip">Add Clip</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- クリップ表示コンテナ -->
+    <div id="dashboard_custom_assistant_clips-container"></div>
+  </div>
+  <script src="{{ url_for('static', filename='dashboard_custom_assistant_script.js') }}"></script>
+  <script src="https://mizumati802.github.io/app_test/dashboard_custom_assistant_script.js"></script>
+  <script src="/dashboard_custom_assistant_script.js"></script>
+</body>
+
+</html>
