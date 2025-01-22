@@ -91,18 +91,45 @@ body {
 }
 
 #side_buttons button {
-  background-color: #555;
+  font-size: 16pt;
+  padding: 16px;
   color: #fff;
-  font-size: inherit;
-  /* 親要素のフォントサイズを継承 */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
 }
 
-#side_buttons button:hover {
-  background-color: #333;
+#side_buttons #side_btn-1 {
+  background-color: #cf6161;
+}
+
+#side_buttons #side_btn-1:hover {
+  background-color: #a03f3f;
+}
+
+#side_buttons #side_btn-2 {
+  background-color: #8aaf9e;
+}
+
+#side_buttons #side_btn-2:hover {
+  background-color: #648375;
+}
+
+#side_buttons #side_btn-3 {
+  background-color: #66001b;
+}
+
+#side_buttons #side_btn-3:hover {
+  background-color: #4d0014;
+}
+
+#side_buttons #side_btn-4 {
+  background-color: #666666;
+}
+
+#side_buttons #side_btn-4:hover {
+  background-color: #4d4d4d;
 }
 
 /* Top Buttons */
@@ -114,19 +141,47 @@ body {
   gap: 10px;
 }
 
+
 #top_buttons button {
-  background-color: #777;
+  font-size: 16pt;
+  padding: 16px;
   color: #fff;
-  font-size: inherit;
-  /* 親要素のフォントサイズを継承 */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
 }
 
-#top_buttons button:hover {
-  background-color: #444;
+#top_buttons #top_btn-1 {
+  background-color: #3d85c6;
+}
+
+#top_buttons #top_btn-1:hover {
+  background-color: #2a5a88;
+}
+
+#top_buttons #top_btn-2 {
+  background-color: #6aa84f;
+}
+
+#top_buttons #top_btn-2:hover {
+  background-color: #4b7c38;
+}
+
+#top_buttons #top_btn-3 {
+  background-color: #e69138;
+}
+
+#top_buttons #top_btn-3:hover {
+  background-color: #b56929;
+}
+
+#top_buttons #top_btn-4 {
+  background-color: #8e7cc3;
+}
+
+#top_buttons #top_btn-4:hover {
+  background-color: #675496;
 }
 
 /* Main Buttons */
