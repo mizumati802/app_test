@@ -7,7 +7,10 @@
   <title>Button URL App</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_style.css') }}">
   <link rel="stylesheet" href="/dashboard_style.css">
+
+  <!-----
   <link rel="stylesheet" href="https://mizumati802.github.io/app_test/dashboard_style.css">
+  ----->
 
   <!-----
   <link rel="stylesheet" href="/static/styleあ.css">
@@ -18,69 +21,81 @@
 <body>
   <div id="app">
     <!-- Top Display Section -->
-    <div id="display-zone" style="height: 200px;">
+    <div id="display-zone">
       <!-- Display current sequence and titles dynamically -->
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
-       <div>aaaaaaaaaaaaaaaa</div>
     </div>
-
-
-    <!-- Button Section -->
-    <div id="button-section" style="position: fixed; bottom: 20px; right: 20px;">
-      <div id="buttons" style="display: grid; gap: 20px; width: 300px; height: 300px;">
+    <div id="button-section">
+      <!-- Side Buttons -->
+      <div id="side_buttons">
+        <a href="//youtube.com" target="_blank" class="button">
+          <button class="color-btn" id="btn-1">yu</button>
+        </a>
+        <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
+        <button class="color-btn" id="btn-3">3</button>
+        <button class="color-btn" id="btn-4">4</button>
+      </div>
+    
+      <!-- Top Buttons -->
+      <div id="top_buttons">
+        <button class="color-btn reload-btn" id="reload-button">Reload</button>
+        <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
+        <button class="color-btn" id="btn-3">3</button>
+        <button class="color-btn" id="btn-4">4</button>
+      </div>
+    
+      <!-- Main Buttons -->
+      <div id="buttons">
         <button class="color-btn number-button" data-number="1" id="btn-1">1</button>
         <button class="color-btn number-button" data-number="2" id="btn-2">2</button>
         <button class="color-btn number-button" data-number="3" id="btn-3">3</button>
         <button class="color-btn number-button" data-number="4" id="btn-4">4</button>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="button_container">
         <button id="submit-button">送信</button>
-        <button class="color-btn" id="btn-2" onclick="gptopenWindow()">Gp</button>
-
-
-      </div>
-
-      <!-- Settings Button -->
-      <button id="settings-button" style="position: absolute; top: 20px; left: 20px;">設定</button>
-
-      <!-- Reload Button -->
-      <button id="Reload-button">Reload</button>
-<br>
-<br>
-<button id="clear-button">Clear</button>
-
-
-
-      <!-- Settings Popup -->
-      <div id="setting-popup"
-        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <h2>設定</h2>
-        <label for="sequence-input">数字の組み合わせ:</label>
-        <input type="text" id="sequence-input"><br>
-        <label for="name-input">タイトル:</label>
-        <input type="text" id="name-input"><br>
-        <label for="url-input">URL:</label>
-        <input type="text" id="url-input"><br>
-        <button id="register-button">登録</button>
-        <button id="close-popup" style="margin-left: 10px;">閉じる</button>
+        <button onclick="mercariopenWindow()" id="mercari_button">メル</button>
       </div>
     </div>
+    
 
-    <script src="{{ url_for('static', filename='dashboard_script.js') }}"></script>
-    <script src="https://mizumati802.github.io/app_test/dashboard_script.js"></script>
-    <script src="/dashboard_script.js"></script>
-    <script src="https://mizumati802.github.io/app_test/dashboard_script.js"></script>
-    <!-----
-  <script src="/static/dashboard_script.js"></script>
-  ----->
+  <!-- Settings Button -->
+  <button id="settings-button">設定</button>
+
+  <!-- Settings Popup -->
+  <div id="setting-popup">
+    <h2>設定</h2>
+
+    <div>
+      <label for="sequence-input">数字の組み合わせ:</label>
+      <input type="text" id="sequence-input">
+    </div>
+
+    <div>
+      <label for="name-input">タイトル:</label>
+      <input type="text" id="name-input">
+    </div>
+
+    <div>
+      <label for="url-input">URL or スクリプト</label>
+      <input type="text" id="url-input">
+    </div>
+
+    <div>
+      <label for="category">カテゴリー:</label>
+      <select id="category" name="category" required>
+        <option value="" disabled selected>カテゴリーを選択</option>
+        <option value="url">URL</option>
+        <option value="custom_scheme">アプリ</option>
+        <option value="frontend_script">フロントエンド_スクリプト</option>
+      </select>
+    </div>
+
+    <div>
+      <button id="register-button">登録</button>
+      <button id="close-popup">閉じる</button>
+    </div>
+  </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='dashboard_script.js') }}"></script>
 </body>
 
 </html>

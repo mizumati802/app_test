@@ -258,5 +258,5 @@ function clearInputs() {
 
 
     // ボタンにクリックイベントを設定
-    document.getElementById("clear-button").addEventListener("click", clearInputs);
+    document.getElementById("reload-button").addEventListener("click", clearInputs);
 
