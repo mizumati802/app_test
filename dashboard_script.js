@@ -226,3 +226,10 @@ function gptopenWindow() {
   }, 500);
 }
 
+
+
+// ボタンにイベントリスナーを追加
+document.getElementById('Reload-button').addEventListener('click', function() {
+  location.reload(); // 画面をリロードする
+});
+
