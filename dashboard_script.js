@@ -192,7 +192,7 @@ document.querySelectorAll(".number-button").forEach((button) => {
 });
 
 
-function openAndHandleWindows() {
+function openAndCloseWindow() {
   // 新しいウィンドウを開く（指定URL）
   const externalWindow = window.open("https://www.mercari.com/jp/", "_blank");
 
