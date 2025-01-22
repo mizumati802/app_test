@@ -91,7 +91,25 @@ body {
   background-color: #660066;
 }
 
+.button_container{
+  margin-top: 20px;
+  display: flex;
+}
+
+#mercari_button {
+  width: 60px;
+  height: 60px;
+  margin-left: 40px;
+  background-color: #7a0000;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 /* Submit Button Styles */
+
 #submit-button {
   width: 200px;
   height: 60px;
@@ -124,3 +142,4 @@ body {
 #settings-button:hover {
   background-color: #e0a800;
 }
+
