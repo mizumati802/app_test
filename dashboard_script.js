@@ -242,15 +242,19 @@ function clearInputs() {
   document.querySelectorAll("input").forEach((input) => {
     input.value = "";
   });
-  
+
   // id="display-zone"の子要素を削除
   const displayZone = document.getElementById("display-zone");
   while (displayZone.firstChild) {
     displayZone.removeChild(displayZone.firstChild);
   }
 
+  // bodyにクラスbg-5を設定
+  document.body.classList.add("bg-5");
+
   updateDisplay();
 }
+
 
 
     // ボタンにクリックイベントを設定
