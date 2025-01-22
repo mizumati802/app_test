@@ -22,6 +22,10 @@ body {
   background-color: #eaddff;
 }
 
+.bg-5 {
+  background-color: #f8f9fa;
+}
+
 /* Display Zone Styles */
 #display-zone {
   background-color: #f9f9f9;
