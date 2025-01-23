@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>丸ごとコード埋め込みツール</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #databaseList {
+      margin-top: 20px;
+      display: none;
+    }
+
+    #databaseList ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    #databaseList li {
+      margin-bottom: 5px;
+      padding: 5px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>丸ごとコード埋め込みツール</h1>
+
+  <form id="embedForm">
+    <h3>コード情報</h3>
+    <input type="text" id="title" placeholder="タイトルを入力してください" style="width: 100%; margin-bottom: 10px;" />
+    <textarea id="fullCode" placeholder="<!DOCTYPE html>から始まるコード全体を貼り付けてください"></textarea>
+    <button type="button" id="previewButton">プレビュー</button>
+    <button type="button" id="saveButton">保存</button>
+    <button type="button" id="embedJsButton">js埋め込み</button>
+  </form>
+
+  <button type="button" id="toggleListButton">データベース一覧を表示</button>
+  <div id="databaseList">
+    <h3>データベース一覧</h3>
+    <ul id="list">
+      <!-- データベース項目が挿入される -->
+    </ul>
+  </div>
+
+  <h3>プレビュー</h3>
+  <iframe id="previewFrame"></iframe>
+
+  <script>
+
+    // WPA環境でのフォーカス問題対応用の新しいスクリプト
+    document.addEventListener('click', function (event) {
+      const inputs = document.querySelectorAll('input, textarea');
+      inputs.forEach(input => {
+        if (input.contains(event.target)) {
+          input.focus();
+        }
+      });
+    });
+
+    // タップイベントでのフォーカス対応
+    document.addEventListener('touchstart', function (event) {
+      const inputs = document.querySelectorAll('input, textarea');
+      inputs.forEach(input => {
+        if (input.contains(event.target)) {
+          input.focus();
+        }
+      });
+    });
+
+    document.getElementById('previewButton').addEventListener('click', () => {
+      const fullCode = document.getElementById('fullCode').value;
+
+      // プレビュー用iframeの内容を更新
+      const previewFrame = document.getElementById('previewFrame');
+      const doc = previewFrame.contentWindow.document;
+      doc.open();
+      doc.write(fullCode);
+      doc.close();
+    });
+
+    document.getElementById('saveButton').addEventListener('click', async () => {
+      let title = document.getElementById('title').value;
+      const fullCode = document.getElementById('fullCode').value;
+
+      // titleが空の場合にデフォルト値として 'nontitle' を設定
+      if (!title || title.trim() === '') {
+        title = 'nontitle';
+      }
+
+      // データをサーバーに送信
+      const response = await fetch('/save_code', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, fullCode })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert('コードが保存されました！');
+      } else {
+        alert('保存に失敗しました。');
+      }
+    });
+
+    document.getElementById('toggleListButton').addEventListener('click', async () => {
+      const databaseList = document.getElementById('databaseList');
+      const button = document.getElementById('toggleListButton');
+
+      // トグル処理：開閉の動作
+      if (databaseList.style.display === 'none' || databaseList.style.display === '') {
+        // データベース一覧を取得
+        const response = await fetch('/get_codes');
+        const data = await response.json();
+
+        // リストをクリアして新しいデータを表示
+        const list = document.getElementById('list');
+        list.innerHTML = ''; // リストをクリア
+        data.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = `ID: ${item.id}, タイトル: ${item.title}, コード: ${item.fullCode.substring(0, 50)}...`;
+
+          const getButton = document.createElement('button');
+          getButton.textContent = '取得';
+          getButton.style.marginLeft = '10px';
+          getButton.addEventListener('click', () => {
+            // 選択したデータを取得して入力フォームに設定
+            document.getElementById('title').value = item.title;
+            document.getElementById('fullCode').value = item.fullCode;
+          });
+
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = '削除';
+          deleteButton.style.marginLeft = '10px';
+          deleteButton.addEventListener('click', async () => {
+            // 選択したデータを削除
+            const response = await fetch(`/delete_code/${item.id}`, { method: 'DELETE' });
+            const result = await response.json();
+            if (result.success) {
+              alert('削除しました！');
+              li.remove(); // 削除済みのリスト項目を画面から消去
+            } else {
+              alert('削除に失敗しました。');
+            }
+          });
+
+          li.appendChild(getButton);
+          li.appendChild(deleteButton);
+          list.appendChild(li);
+        });
+
+        databaseList.style.display = 'block'; // リストを表示
+        button.textContent = 'データベース一覧を隠す';
+      } else {
+        databaseList.style.display = 'none'; // リストを非表示
+        button.textContent = 'データベース一覧を表示';
+      }
+    });
+
+    document.getElementById('embedJsButton').addEventListener('click', () => {
+      const fullCode = document.getElementById('fullCode').value;
+
+      // HTMLにJSコードを埋め込み
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(fullCode, 'text/html');
+
+      const scriptElements = doc.querySelectorAll('script');
+      if (scriptElements.length > 0) {
+        scriptElements.forEach(script => {
+          const newScript = document.createElement('script');
+          if (script.src) {
+            newScript.src = script.src;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+        alert('JavaScriptコードが埋め込まれました！');
+      } else {
+        const newScript = document.createElement('script');
+        newScript.textContent = '// スクリプトがありませんが、埋め込み処理を実行しました。';
+        document.body.appendChild(newScript);
+        alert('スクリプトタグが存在しませんが、処理が実行されました！');
+      }
+    });
+
+    // 初回ロード時にmemoryを取得して設定
+    async function loadMemory() {
+      const response = await fetch('/get_memory');
+      const data = await response.json();
+
+      if (data && data.fullCode) {
+        document.getElementById('title').value = data.title || '';
+        document.getElementById('fullCode').value = data.fullCode;
+      }
+    }
+
+    // ページロード時にmemoryを取得してフォームを初期化
+    window.onload = loadMemory;
+  </script>
+</body>
+
+</html>
