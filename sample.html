@@ -37,7 +37,7 @@
       margin-bottom: 40px;
     }
 
-    select{
+    select {
       font-size: 16pt;
     }
 
@@ -355,7 +355,7 @@
       <p>現在の文字数: <span id="char-count">0</span>文字</p>
       <!-- 出力ボタン -->
       <button type="button" id="generate-title">生成</button>
-      <button type="button" id="reformat-title">再整形</button>
+      <button type="button" id="clear-title">クリア</button>
       <button type="button" id="copy-title">コピー</button>
       </form>
     </div>
@@ -448,7 +448,23 @@
         alert("コピーに失敗しました: " + err);
       });
     });
+
+    document.getElementById('clear-title').addEventListener('click', () => {
+      // クリア対象の要素を取得
+      const textarea = document.getElementById('output');
+      const charCount = document.getElementById('char-count');
+
+      // テキストエリアをクリア
+      textarea.value = '';
+
+      // 文字数カウントをリセット
+      charCount.textContent = '0';
+    });
+
+
   </script>
 </body>
+
+
 
 </html>
