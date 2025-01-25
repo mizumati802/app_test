@@ -11,6 +11,10 @@
       margin-top: 360px;
     }
 
+    select {
+      font-size: 20pt;
+    }
+
     #output {
       margin-top: 20px;
       font-size: 18px;
@@ -35,10 +39,6 @@
       align-items: start;
       font-weight: bold;
       margin-bottom: 40px;
-    }
-
-    select {
-      font-size: 16pt;
     }
 
     .item_category_section {
@@ -354,9 +354,9 @@
       <textarea id="output"></textarea>
       <p>現在の文字数: <span id="char-count">0</span>文字</p>
       <!-- 出力ボタン -->
-      <button type="button" id="generate-title">生成</button>
-      <button type="button" id="clear-title">クリア</button>
+      <button type="button" id="generate-title">タイトルを生成</button>
       <button type="button" id="copy-title">コピー</button>
+      <button type="button" id="clear-title">クリア</button>
       </form>
     </div>
 
@@ -428,17 +428,6 @@
       }
     });
 
-    // 再整形ボタン
-    document.getElementById("reformat-title").addEventListener("click", function () {
-      const outputElement = document.getElementById("output");
-      let title = outputElement.value;
-
-      // 再整形のロジック（ここで任意の整形処理を追加できます）
-      title = title.trim(); // 余分な空白を削除
-
-      outputElement.value = title;
-    });
-
     // コピー機能
     document.getElementById("copy-title").addEventListener("click", function () {
       const outputElement = document.getElementById("output");
@@ -449,22 +438,14 @@
       });
     });
 
-    document.getElementById('clear-title').addEventListener('click', () => {
-      // クリア対象の要素を取得
-      const textarea = document.getElementById('output');
-      const charCount = document.getElementById('char-count');
-
-      // テキストエリアをクリア
-      textarea.value = '';
-
-      // 文字数カウントをリセット
-      charCount.textContent = '0';
+    document.getElementById("clear-title").addEventListener("click", () => {
+      const textarea = document.getElementById("output");
+      const charCount = document.getElementById("char-count");
+      if (textarea) textarea.value = ''; // テキストエリアをクリア
+      if (charCount) charCount.textContent = '0'; // 文字数をリセット
     });
-
 
   </script>
 </body>
-
-
 
 </html>
