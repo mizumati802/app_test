@@ -115,19 +115,17 @@
       font-size: 18pt;
     }
 
-    .create_section button{
+    .create_section button {
       font-size: 18pt;
     }
 
-    .create_section textarea{
+    .create_section textarea {
       font-size: 18pt;
     }
 
-    #output{
+    #output {
       font-size: 16pt;
     }
-
-
   </style>
 </head>
 
@@ -189,7 +187,7 @@
             <option value="Leather調">Leather調</option>
             <option value="Mohair">モヘヤ</option>
             <option value="Shaggy">シャギー</option>
-            <option value="Overdye">オーバーダイ</option>            
+            <option value="Overdye">オーバーダイ</option>
             <option value="Shiny">Shiny</option>
           </select>
         </div>
@@ -240,7 +238,7 @@
       <div class="accordion-container">
         <h3 class="accordion">ジャケット</h3>
         <div class="panel">
-          
+
           <select id="jacket" class="category-select">
             <option value="Down Vest">Down Vest</option>
             <option value="Down JKT">Down JKT</option>
@@ -258,7 +256,7 @@
       <div class="accordion-container">
         <h3 class="accordion">ニット</h3>
         <div class="panel">
-          
+
           <select id="knit" class="category-select">
             <option value="HalfZip Knit">HalfZip Knit</option>
             <option value="Knit">ニット</option>
@@ -271,7 +269,7 @@
       <div class="accordion-container">
         <h3 class="accordion">スウェット</h3>
         <div class="panel">
-          
+
           <select id="sweat" class="category-select">
             <option value="Sweat">Sweat</option>
             <option value="Sweat Parker">sweatパーカー</option>
@@ -282,7 +280,7 @@
       <div class="accordion-container">
         <h3 class="accordion">パンツ</h3>
         <div class="panel">
-          
+
           <select id="pants" class="category-select">
             <!-- オプションは必要に応じて追加 -->
           </select>
@@ -292,7 +290,7 @@
       <div class="accordion-container">
         <h3 class="accordion">スカート</h3>
         <div class="panel">
-          
+
           <select id="skirt" class="category-select">
             <!-- オプションは必要に応じて追加 -->
           </select>
@@ -302,7 +300,7 @@
       <div class="accordion-container">
         <h3 class="accordion">Tシャツ</h3>
         <div class="panel">
-          
+
           <select id="tshirt" class="category-select">
             <option value="ロンTee">ロンTee</option>
           </select>
@@ -312,7 +310,7 @@
       <div class="accordion-container">
         <h3 class="accordion">帽子</h3>
         <div class="panel">
-          
+
           <select id="hat" class="category-select">
             <option value="Knitcap">Knitcap</option>
             <option value="Ear Flap Knitcap">Ear Flap Knitcap</option>
@@ -324,7 +322,7 @@
       <div class="accordion-container">
         <h3 class="accordion">バッグ</h3>
         <div class="panel">
-          
+
           <select id="bag" class="category-select">
             <option value="Hand Bag">Hand Bag</option>
             <option value="Shoulder Bag">Shoulder Bag</option>
@@ -339,7 +337,7 @@
       <div class="accordion-container">
         <h3 class="accordion">靴</h3>
         <div class="panel">
-          
+
           <select id="shoes" class="category-select">
             <!-- オプションは必要に応じて追加 -->
           </select>
@@ -352,7 +350,7 @@
       <textarea id="output"></textarea>
       <p>現在の文字数: <span id="char-count">0</span>文字</p>
       <!-- 出力ボタン -->
-      <button type="button" id="generate-title">タイトルを生成</button>
+      <button type="button" id="generate-title">生成</button>
       <button type="button" id="reformat-title">再整形</button>
       <button type="button" id="copy-title">コピー</button>
       </form>
@@ -361,8 +359,8 @@
   </div>
 
   <script>
-        // アコーディオンの機能
-        const accordions = document.querySelectorAll('.accordion');
+    // アコーディオンの機能
+    const accordions = document.querySelectorAll('.accordion');
     accordions.forEach(acc => {
       acc.addEventListener('click', function () {
         this.classList.toggle('active');
