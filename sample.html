@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タイトル生成ツール</title>
+  <style>
+    /* 基本スタイル */
+    .app {
+      margin-top: 360px;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+    }
+
+    .red-text {
+      color: red;
+    }
+
+    /* グリッドレイアウト */
+    .item_category_section,
+    .button_section,
+    .style-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    .item_category_section {
+      column-gap: 30px;
+      row-gap: 0;
+    }
+
+    .style-section {
+      margin-bottom: 60px;
+    }
+
+    /* ラベルと見出しの共通スタイル */
+    label {
+      display: block;
+    }
+
+    h2 {
+      grid-column: span 2;
+      margin: 0;
+    }
+
+    /* アコーディオンスタイル */
+    .accordion-container {
+      display: block;
+      width: 100%;
+    }
+
+    .accordion {
+      background-color: #f1f1f1;
+      color: #444;
+      cursor: pointer;
+      padding: 10px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      position: relative;
+    }
+
+    .accordion:after {
+      content: '\002B';
+      font-size: 18px;
+      color: #777;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      display: none;
+      padding: 0 10px;
+      background-color: #f9f9f9;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    /* 出力エリア */
+    .create_section {
+      position: fixed;
+      top: 0;
+      right: 10px;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 90%;
+      height: 280px;
+      overflow-y: auto;
+      max-height: 80%;
+      font-size: 18pt;
+    }
+
+    .create_section button{
+      font-size: 18pt;
+    }
+
+    .create_section textarea{
+      font-size: 18pt;
+    }
+
+    #output{
+      font-size: 16pt;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- スタイル -->
+    <div class="style-section">
+      <label for="style">style:</label>
+      <select id="style">
+        <option value="平成グランジY2K" selected>平成グランジY2K</option>
+        <option value="平成Y2Kギャルopium">平成Y2Kギャルopium</option>
+        <option value="アメカジ古着">アメカジ古着</option>
+      </select>
+    </div>
+    <div class="button_section">
+      <div class="year-prefix-section">
+        <!-- 年代 -->
+        <label for="year">年代:</label>
+        <select id="year">
+          <option value="80s">80s</option>
+          <option value="90s">90s</option>
+          <option value="00s" selected>00s</option>
+          <option value="10s">10s</option>
+        </select><br>
+
+        <!-- 文頭 -->
+        <label for="prefix">製造国:</label>
+        <select id="prefix">
+          <option value="vintage">vintage</option>
+          <option value="Archive" selected>Archive</option>
+          <option value="old">old</option>
+          <option value="平成">平成</option>
+          <option value="米国製">米国製</option>
+          <option value="italy made">イタリア製</option>
+          <option value="japan made">日本製</option>
+          <option value="france made">フランス製</option>
+          <option value="korea made">韓国製</option>
+        </select><br>
+      </div>
+
+      <div class="material-feature-section">
+        <!-- 素材 -->
+        <div>
+          <label for="material">素材:</label>
+          <select id="material">
+            <option value="">なし</option>
+            <option value="Wool">Wool</option>
+            <option value="Silk">Silk</option>
+            <option value="Leather">Leather</option>
+            <option value="Denim">Denim</option>
+            <option value="Polyester">Polyester</option>
+            <option value="Nylon">Nylon</option>
+            <option value="Linen">Linen</option>
+            <option value="Fur">Fur</option>
+            <option value="Down">Down</option>
+            <option value="Cashmere">カシミヤ</option>
+            <option value="アンゴラ">アンゴラ</option>
+            <option value="Vegan Leather">Vegan Leather</option>
+            <option value="Leather調">Leather調</option>
+            <option value="Mohair">モヘヤ</option>
+            <option value="Shaggy">シャギー</option>
+            <option value="Overdye">オーバーダイ</option>            
+            <option value="Shiny">Shiny</option>
+          </select>
+        </div>
+
+        <!-- 付属 -->
+        <div>
+          <label for="feature1">付属1:</label>
+          <select id="feature1">
+            <option value="">なし</option>
+            <option value="モンスターFur">モンスターファー</option>
+            <option value="鬼ファー">鬼ファー</option>
+            <option value="Fur Collar">Fur Collar</option>
+            <option value="Studs">Studs</option>
+            <option value="Bijou">ビジュー</option>
+            <option value="Crush加工">Crushクラッシュ</option>
+            <option value="編込">編込</option>
+            <option value="退廃">退廃</option>
+            <option value="Cross">十字架CROSS</option>
+            <option value="Skull">Skull</option>
+            <option value="二次加工">二次加工</option>
+            <option value="ギャル">ギャル</option>
+            <option value="短丈">短丈</option>
+          </select>
+          <br>
+          <label for="feature2">付属2:</label>
+          <select id="feature2">
+            <option value="">なし</option>
+            <option value="モンスターFur">モンスターファー</option>
+            <option value="鬼ファー">鬼ファー</option>
+            <option value="Fur Collar">Fur Collar</option>
+            <option value="Studs">Studs</option>
+            <option value="Bijou">ビジュー</option>
+            <option value="Crush加工">Crushクラッシュ</option>
+            <option value="編込">編込</option>
+            <option value="退廃">退廃</option>
+            <option value="Cross">十字架CROSS</option>
+            <option value="Skull">Skull</option>
+            <option value="二次加工">二次加工</option>
+            <option value="ギャル">ギャル</option>
+            <option value="短丈">短丈</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品カテゴリ -->
+    <div class="item_category_section">
+      <div class="accordion-container">
+        <h3 class="accordion">ジャケット</h3>
+        <div class="panel">
+          
+          <select id="jacket" class="category-select">
+            <option value="Down Vest">Down Vest</option>
+            <option value="Down JKT">Down JKT</option>
+            <option value="Leather Riders JKT">Leather Riders JKT</option>
+            <option value="MilitaryFlight Jacket">Flight Jacket</option>
+            <option value="coat">コート</option>
+            <option value="Mods Coat">モッズコート</option>
+            <option value="Nylon Jacket">ナイロンジャケット</option>
+            <option value="Parker">パーカー</option>
+            <option value="Mouton Jacket">ムートンジャケット</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">ニット</h3>
+        <div class="panel">
+          
+          <select id="knit" class="category-select">
+            <option value="HalfZip Knit">HalfZip Knit</option>
+            <option value="Knit">ニット</option>
+            <option value="Wool Knit">ウールニット</option>
+            <option value="Cashmere Knit">カシミヤニット</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">スウェット</h3>
+        <div class="panel">
+          
+          <select id="sweat" class="category-select">
+            <option value="Sweat">Sweat</option>
+            <option value="Sweat Parker">sweatパーカー</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">パンツ</h3>
+        <div class="panel">
+          
+          <select id="pants" class="category-select">
+            <!-- オプションは必要に応じて追加 -->
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">スカート</h3>
+        <div class="panel">
+          
+          <select id="skirt" class="category-select">
+            <!-- オプションは必要に応じて追加 -->
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">Tシャツ</h3>
+        <div class="panel">
+          
+          <select id="tshirt" class="category-select">
+            <option value="ロンTee">ロンTee</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">帽子</h3>
+        <div class="panel">
+          
+          <select id="hat" class="category-select">
+            <option value="Knitcap">Knitcap</option>
+            <option value="Ear Flap Knitcap">Ear Flap Knitcap</option>
+            <option value="Furcap">ファーcap</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">バッグ</h3>
+        <div class="panel">
+          
+          <select id="bag" class="category-select">
+            <option value="Hand Bag">Hand Bag</option>
+            <option value="Shoulder Bag">Shoulder Bag</option>
+            <option value="Sling Bag ワンショルダー">ワンショルダー Bag</option>
+            <option value="BackPack">BackPack</option>
+            <option value="Leather ShoulderBag">レザーショルダーバッグ</option>
+            <option value="Leather HandBag">レザーハンドバッグ</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="accordion-container">
+        <h3 class="accordion">靴</h3>
+        <div class="panel">
+          
+          <select id="shoes" class="category-select">
+            <!-- オプションは必要に応じて追加 -->
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 出力ゾーン -->
+    <div class="create_section">
+      <textarea id="output"></textarea>
+      <p>現在の文字数: <span id="char-count">0</span>文字</p>
+      <!-- 出力ボタン -->
+      <button type="button" id="generate-title">タイトルを生成</button>
+      <button type="button" id="reformat-title">再整形</button>
+      <button type="button" id="copy-title">コピー</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+        // アコーディオンの機能
+        const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(acc => {
+      acc.addEventListener('click', function () {
+        this.classList.toggle('active');
+        const panel = this.nextElementSibling;
+        if (panel.style.display === 'block') {
+          panel.style.display = 'none';
+        } else {
+          panel.style.display = 'block';
+        }
+      });
+    });
+
+    // 直近で選択されたカテゴリの値を取得
+    let lastSelectedCategory = '';
+    document.querySelectorAll('.category-select').forEach(select => {
+      select.addEventListener('change', function () {
+        lastSelectedCategory = this.value;
+      });
+    });
+
+    document.getElementById("generate-title").addEventListener("click", function () {
+      // 各選択値を取得
+      const year = document.getElementById("year").value;
+      const prefix = document.getElementById("prefix").value;
+      const material = document.getElementById("material").value;
+      let feature1 = document.getElementById("feature1").value;
+      let feature2 = document.getElementById("feature2").value;
+      const style = document.getElementById("style").value;
+
+      // タイトルを生成
+      let keywords = [material, feature1, feature2].filter(keyword => keyword).join(" ");
+      let title = `[${year}_${prefix}] ${keywords} ${lastSelectedCategory} ${style}`;
+
+      // 空白をすべて削除
+      title = title.replace(/\s+/g, "");
+
+      // 40文字を超える場合の処理
+      if (title.length > 40) {
+        keywords = [material, feature1].filter(keyword => keyword).join(" ");
+        title = `[${year}_${prefix}] ${keywords} ${lastSelectedCategory} ${style}`.replace(/\s+/g, "");
+      }
+
+      if (title.length > 40) {
+        keywords = [material].filter(keyword => keyword).join(" ");
+        title = `[${year}_${prefix}] ${keywords} ${lastSelectedCategory} ${style}`.replace(/\s+/g, "");
+      }
+
+      // 文字数が40を超えている場合は赤にする
+      const outputElement = document.getElementById("output");
+      const charCountElement = document.getElementById("char-count");
+      charCountElement.textContent = title.length;
+
+      if (title.length > 40) {
+        outputElement.value = title;
+        outputElement.classList.add("red-text");
+        outputElement.style.color = "red";
+      } else {
+        outputElement.value = title;
+        outputElement.classList.remove("red-text");
+        outputElement.style.color = "#333";
+      }
+    });
+
+    // 再整形ボタン
+    document.getElementById("reformat-title").addEventListener("click", function () {
+      const outputElement = document.getElementById("output");
+      let title = outputElement.value;
+
+      // 再整形のロジック（ここで任意の整形処理を追加できます）
+      title = title.trim(); // 余分な空白を削除
+
+      outputElement.value = title;
+    });
+
+    // コピー機能
+    document.getElementById("copy-title").addEventListener("click", function () {
+      const outputElement = document.getElementById("output");
+      navigator.clipboard.writeText(outputElement.value).then(() => {
+        alert("クリップボードにコピーしました！");
+      }).catch(err => {
+        alert("コピーに失敗しました: " + err);
+      });
+    });
+  </script>
+</body>
+
+</html>
