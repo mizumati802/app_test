@@ -130,6 +130,13 @@
     #output {
       font-size: 16pt;
     }
+
+    /* コピー完了時の背景色 */
+    .bg_copycomplete {
+      background-color: #d4edda;
+      /* 明るい緑色 */
+      transition: background-color 0.5s ease;
+    }
   </style>
 </head>
 
@@ -432,11 +439,18 @@
     document.getElementById("copy-title").addEventListener("click", function () {
       const outputElement = document.getElementById("output");
       navigator.clipboard.writeText(outputElement.value).then(() => {
-        alert("クリップボードにコピーしました！");
+        // クラスを付与
+        outputElement.classList.add("bg_copycomplete");
+        // 1秒後にクラスを削除
+        setTimeout(() => {
+          outputElement.classList.remove("bg_copycomplete");
+        }, 1000);
       }).catch(err => {
-        alert("コピーに失敗しました: " + err);
+        // エラー処理（必要に応じて）
+        console.error("コピーに失敗しました: ", err);
       });
     });
+
 
     document.getElementById("clear-title").addEventListener("click", () => {
       const textarea = document.getElementById("output");
