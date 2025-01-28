@@ -7,50 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchButton = document.getElementById("search-button");
   const deleteTemplateButton = document.getElementById("delete-template");
 
-  function copyToClipboard(text, element) {
-    if (text.includes("商品__")) {
-      const randomProductNumber = generateRandomProductNumber();
-      text = text.replace("商品__", "");
-      text = `${randomProductNumber} ${text}`;
-    }
-
-    if (navigator.clipboard) {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => highlightElement(element))
-        .catch((err) => {
-          console.error("Clipboard error:", err);
-          fallbackCopyToClipboard(text, element);
-        });
-    } else {
-      fallbackCopyToClipboard(text, element);
-    }
-  }
-
-  function fallbackCopyToClipboard(text, element) {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.position = "fixed";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand("copy");
-      highlightElement(element);
-    } catch (err) {
-      console.error("Fallback copy failed:", err);
-    }
-    document.body.removeChild(textArea);
-  }
-
-  function highlightElement(element) {
-    const originalBackground = element.style.backgroundColor;
-    element.style.backgroundColor = "#333333";
-    setTimeout(() => {
-      element.style.backgroundColor = originalBackground;
-    }, 2000);
-  }
-
   function loadTemplates() {
     fetch("/get_templates")
       .then((response) => response.json())
@@ -75,11 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
               const templateId = item.dataset.id;
               deleteTemplate(templateId, item);
             });
-
-            item.addEventListener("click", () => {
-              const textToCopy = item.dataset.txt;
-              copyToClipboard(textToCopy, item);
-            });
           });
         }
       })
@@ -103,14 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButtons = document.querySelectorAll(".delete-template-button");
     deleteButtons.forEach((button) => {
       button.style.display = "block";
-    });
-
-    const templateItems = document.querySelectorAll(".template-item");
-    templateItems.forEach((item) => {
-      item.removeEventListener("click", () => {
-        const textToCopy = item.dataset.txt;
-        copyToClipboard(textToCopy, item);
-      });
     });
   });
 
@@ -168,11 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
               deleteButton.addEventListener("click", () => {
                 const templateId = item.dataset.id;
                 deleteTemplate(templateId, item);
-              });
-
-              item.addEventListener("click", () => {
-                const textToCopy = item.dataset.txt;
-                copyToClipboard(textToCopy, item);
               });
             });
           } else {
