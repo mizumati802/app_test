@@ -196,7 +196,8 @@ function footer_titleopenWindow() {
     // タイトルコピー
     document.getElementById("title-copy-button").addEventListener("click", () => {
       if (!currentTemplate) return;
-      const title = currentTemplate.querySelector("h3").textContent;
+      // ▼ここで行頭の空白を削除
+      const title = currentTemplate.querySelector("h3").textContent.replace(/^[ \t]+/gm, "");
       navigator.clipboard.writeText(title).then(() => {
         alert("タイトルをコピーしました。");
         updateTemplateContent();
@@ -207,7 +208,8 @@ function footer_titleopenWindow() {
     // 説明コピー
     document.getElementById("description-copy-button").addEventListener("click", () => {
       if (!currentTemplate) return;
-      const description = currentTemplate.getAttribute("data-txt") || "";
+      // ▼ここで行頭の空白を削除
+      const description = (currentTemplate.getAttribute("data-txt") || "").replace(/^[ \t]+/gm, "");
       navigator.clipboard.writeText(description).then(() => {
         alert("説明をコピーしました。");
         updateTemplateContent();
