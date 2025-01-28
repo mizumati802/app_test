@@ -207,7 +207,7 @@ body {
   /* 影をつけてポップアップっぽく */
   z-index: 9999;
   /* 最前面に表示 */
-  
+
   /* 初期は非表示 */
 }
 
@@ -231,76 +231,7 @@ button {
   cursor: pointer;
 }
 
-
-
-/*css 
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      z-index: 1000;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    button {
-      margin: 5px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    #dynamic-dropdown {
-      margin-bottom: 15px;
-      padding: 5px;
-      width: 100%;
-    }
-
-    .template-item {
-      cursor: pointer;
-      padding: 10px;
-      border: 1px solid #ddd;
-      margin-bottom: 5px;
-      background: #fff;
-    }
-
-    .template-item:hover {
-      background: #f0f0f0;
-    }
+.bg_complete {
+  background-color: rgb(240, 255, 240);
+  /* お好みの薄いグリーンに変更可 */
+}
