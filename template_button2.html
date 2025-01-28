@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Button App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='template_button_style.css') }}">
+  <link rel="stylesheet" href="/template_button_style.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- 検索と登録のメニューコンテナ -->
+    <div class="menu_container">
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search Templates">
+        <button id="search-button">検索</button>
+        <button id="template_toggleButton">登録</button>
+      </div>
+      <!-- 登録フォーム -->
+      <div id="template_container" class="hidden">
+        <div class="template-form">
+          <input type="text" id="title-input" placeholder="Title">
+          <textarea id="txt-input" placeholder="Template text"></textarea>
+          <button id="add-template">Add Template</button>
+          <button id="delete-template">delete Template</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- テンプレート表示コンテナ -->
+    <div id="templates-container">
+      <div class="template-item" data-id="1" data-txt="商品__
+
+      肩幅 cm
+      袖丈 cm
+      身幅 cm
+      着丈 cm (※素人採寸)
+      
+      素材:
+      
+      
+      状態:
+      
+      古着好きの方でしたら、まだまだご利用いただけるかと思います。
+      
+      古着、ヴィンテージにご理解のない方はご遠慮くださいませ
+      
+      平面的に畳める商品は折りたたんで保管、または発送する可能性ございます。畳ジワなどはご了承くださいませ。
+      
+      ●その他、注意事項：
+      自宅にて保管していました。細かいデザインなどは写真にてご確認ください。発送前に気をつけますが、お色の暗いアイテムや明るいアイテムは埃が目立ちやすく、付着している場合ございますのでご了承ください。
+      
+      #古着 #ヴィンテージ #個性
+      
+      #00s #90s #80s #70s #60s #hystericglamor #ヒステリックグラマー #undercover #アンダーカバー
+      #number nine ナンバーナイン #平成 #Y2K #高円寺 #下北沢 #vintage #fashion #used #古着#itimi
+      #opium #フェアリーグランジ #バレエコア #Archive
+      
+      #在原 みゆ紀 #菅田将暉 菅田 King Gnu キングヌー 常田 井口 dairiku ダイリク 常田大希" >
+        <h3>トップス</h3>
+        <p>商品__
+
+          肩幅 cm
+          袖丈 cm
+          身幅 cm
+          着丈 cm (※素人採寸)
+
+          素材:
+
+
+          状態:
+
+          古着好きの方でしたら、まだまだご利用いただけるかと思います。
+
+          古着、ヴィンテージにご理解のない方はご遠慮くださいませ
+
+          平面的に畳める商品は折りたたんで保管、または発送する可能性ございます。畳ジワなどはご了承くださいませ。
+
+          ●その他、注意事項：
+          自宅にて保管していました。細かいデザインなどは写真にてご確認ください。発送前に気をつけますが、お色の暗いアイテムや明るいアイテムは埃が目立ちやすく、付着している場合ございますのでご了承ください。
+
+          #古着 #ヴィンテージ #個性
+
+          #00s #90s #80s #70s #60s #hystericglamor #ヒステリックグラマー #undercover #アンダーカバー
+          #number nine ナンバーナイン #平成 #Y2K #高円寺 #下北沢 #vintage #fashion #used #古着#itimi
+          #opium #フェアリーグランジ #バレエコア #Archive
+
+          #在原 みゆ紀 #菅田将暉 菅田 King Gnu キングヌー 常田 井口 dairiku ダイリク 常田大希</p>
+        <button class="delete-template-button" style="display: none; font-size: 20pt;">削除</button>
+      </div>
+
+    </div>
+    <div class="mercari_footer_button">
+      <button onclick="footer_mercariopenWindow()" id="mercari_footer_button">メル</button>
+    </div>
+    <div class="title_footer_button">
+      <button onclick="footer_titleopenWindow()" id="title_footer_button">タイトル</button>
+    </div>
+  </div>
+  <!-- ポップアップ -->
+  <div id="popup" class="hidden">
+    <div class="popup-content">
+      <h3>テンプレート編集</h3>
+      <label for="dynamic-dropdown">項目を選択:</label>
+      <select id="dynamic-dropdown"></select>
+
+      <div id="dynamic-forms"></div>
+
+      <button id="ok-button">OK</button>
+      <button id="cancel-button">キャンセル</button>
+    </div>
+  </div>
+  <div id="copy-popup" class="hidden">
+    <div class="popup-content">
+      <h3>コピー操作</h3>
+      <button id="title-copy-button">タイトルcopy</button>
+      <button id="description-copy-button">説明copy</button>
+    </div>
+  </div>
+  
+
+  <div id="templates-container"></div>
+  </div>
+
+  <script src="/template_button_script2.js"></script>
+  <!--
+      <script src="{{ url_for('static', filename='template_button_script.js') }}"></script>
+      
+  -->
+</body>
+
+</html>
