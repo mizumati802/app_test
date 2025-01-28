@@ -134,29 +134,173 @@ body {
 
 /* 背景色の循環 */
 .template-item:nth-child(7n+1) {
-  background-color: #b20000; /* 元の赤より暗い */
+  background-color: #b20000;
+  /* 元の赤より暗い */
 }
 
 .template-item:nth-child(7n+2) {
-  background-color: #0000b2; /* 元の青より暗い */
+  background-color: #0000b2;
+  /* 元の青より暗い */
 }
 
 .template-item:nth-child(7n+3) {
-  background-color: #3b8052; /* 元の黄緑より暗い */
+  background-color: #3b8052;
+  /* 元の黄緑より暗い */
 }
 
 .template-item:nth-child(7n+4) {
-  background-color: #4b0082; /* 元の紫より暗い */
+  background-color: #4b0082;
+  /* 元の紫より暗い */
 }
 
 .template-item:nth-child(7n+5) {
-  background-color: #5c4033; /* 元の茶色より暗い */
+  background-color: #5c4033;
+  /* 元の茶色より暗い */
 }
 
 .template-item:nth-child(7n+6) {
-  background-color: #d87093; /* 元のピンクより暗い */
+  background-color: #d87093;
+  /* 元のピンクより暗い */
 }
 
 .template-item:nth-child(7n+7) {
-  background-color: #505050; /* 元のグレーより暗い */
+  background-color: #505050;
+  /* 元のグレーより暗い */
 }
+
+
+
+
+/*-------------------------------------------------------ここから--------- */
+
+
+/* オーバーレイ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  /* 背景を半透明に */
+  z-index: 9998;
+  /* ポップアップより低く、通常要素より高く */
+  display: none;
+  /* 初期は非表示 */
+}
+
+/* ポップアップ本体 */
+#popup, #copy-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 中央寄せ */
+  width: 400px;
+  max-width: 90%;
+  /* 画面が狭いときに対応 */
+  padding: 16px;
+  background: #fff;
+  /* 白背景 */
+  border: 2px solid #666;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* 影をつけてポップアップっぽく */
+  z-index: 9999;
+  /* 最前面に表示 */
+  
+  /* 初期は非表示 */
+}
+
+
+select {
+  margin: 4px 0;
+}
+
+.dynamic-input {
+  width: 80%;
+  height: 80px;
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* 適宜ボタンなどのスタイルも変更可能 */
+button {
+  margin: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+
+
+/*css 
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1000;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #dynamic-dropdown {
+      margin-bottom: 15px;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .template-item {
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      background: #fff;
+    }
+
+    .template-item:hover {
+      background: #f0f0f0;
+    }

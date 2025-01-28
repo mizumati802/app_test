@@ -55,6 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteButtons.forEach((button) => {
       button.style.display = "block";
     });
+
+    const templateItems = document.querySelectorAll(".template-item");
+    templateItems.forEach((item) => {
+      item.removeEventListener("click", () => {
+        const textToCopy = item.dataset.txt;
+        copyToClipboard(textToCopy, item);
+      });
+    });
   });
 
   addTemplateButton.addEventListener("click", () => {
@@ -112,6 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const templateId = item.dataset.id;
                 deleteTemplate(templateId, item);
               });
+
+              item.addEventListener("click", () => {
+                const textToCopy = item.dataset.txt;
+                copyToClipboard(textToCopy, item);
+              });
             });
           } else {
             templatesContainer.innerHTML = "<p>No matching templates found.</p>";
@@ -154,135 +167,256 @@ function footer_titleopenWindow() {
 
 
 
-// 動的データ例
-const dropdownData = {
-  1: ["sample1", "sample2", "sample3"],
-  2: ["sample1", "sample2", "sample3"],
-  3: ["sample1", "sample2", "sample3"],
-};
+        // ========= グローバル変数 =========
+  let currentTemplate = null; // 現在操作中のテンプレート要素
+  const existingProductNumbers = new Set(); // 生成済み商品番号を記憶して重複防止
 
-// 商品番号生成用
-const existingProductNumbers = new Set();
+  // ページ読み込み時
+  document.addEventListener('DOMContentLoaded', function () {
+    // ドロップダウン生成
+    loadWordTemplates();
 
-function generateRandomProductNumber() {
-  const prefix = "商品__";
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let randomNumber;
+    // テンプレート項目クリックでポップアップ表示
+    document.querySelectorAll(".template-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        currentTemplate = item;
+        openPopup();
+      });
+    });
 
-  do {
-    randomNumber =
-      prefix +
-      Array.from(
-        { length: 3 },
-        () => chars[Math.floor(Math.random() * chars.length)]
-      ).join("");
-  } while (existingProductNumbers.has(randomNumber)); // 被りを避ける
+    // クリアボタン
+    document.getElementById('clear_templatebutton').addEventListener('click', resetDropdowns);
 
-  existingProductNumbers.add(randomNumber);
-  return randomNumber;
-}
+    // OKボタン
+    document.getElementById("ok-button").addEventListener("click", handleOkButton);
 
-// ポップアップ操作
-const popup = document.getElementById("popup");
-const dynamicDropdown = document.getElementById("dynamic-dropdown");
-const dynamicForms = document.getElementById("dynamic-forms");
-const copyPopup = document.getElementById("copy-popup"); // 新しいポップアップ
-let currentTemplate = null; // 選択中のテンプレートを記憶
+    // キャンセルボタン
+    document.getElementById("cancel-button").addEventListener("click", closePopup);
 
-// 修正: template-itemにイベントリスナーを追加
-document.querySelectorAll(".template-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    currentTemplate = item; // 現在のテンプレートを記憶
-    const templateId = item.getAttribute("data-id");
-    openPopup(templateId);
+    // タイトルコピー
+    document.getElementById("title-copy-button").addEventListener("click", () => {
+      if (!currentTemplate) return;
+      const title = currentTemplate.querySelector("h3").textContent;
+      navigator.clipboard.writeText(title).then(() => {
+        alert("タイトルをコピーしました。");
+        updateTemplateContent();
+        closeCopyPopup();
+      });
+    });
+
+    // 説明コピー
+    document.getElementById("description-copy-button").addEventListener("click", () => {
+      if (!currentTemplate) return;
+      const description = currentTemplate.getAttribute("data-txt") || "";
+      navigator.clipboard.writeText(description).then(() => {
+        alert("説明をコピーしました。");
+        updateTemplateContent();
+        closeCopyPopup();
+      });
+    });
   });
-});
 
-// ポップアップを開く
-function openPopup(templateId) {
-  // ドロップダウンを動的生成
-  if (dropdownData[templateId]) {
-    dynamicDropdown.innerHTML = dropdownData[templateId]
-      .map((option) => `<option value="${option}">${option}</option>`)
-      .join("");
-  } else {
-    dynamicDropdown.innerHTML = "<option>データがありません</option>";
+  // ドロップダウン用テンプレートデータを生成して配置
+  async function loadWordTemplates() {
+    const data = {
+      success: true,
+      items: [
+        { category: 'Category 1', name: 'Template A', description: 'Description A' },
+        { category: 'Category 1', name: 'Template B', description: 'Description B' },
+        { category: 'Category 2', name: 'Template C', description: 'Description C' },
+        { category: 'Category 2', name: 'Template D', description: 'Description D' }
+      ]
+    };
+
+    if (!data.success) {
+      console.error('データ取得に失敗:', data.message);
+      return;
+    }
+
+    const container = document.getElementById('templateDropdownContainer');
+    if (!container) {
+      console.error('#templateDropdownContainer が見つかりません。');
+      return;
+    }
+    container.innerHTML = ''; // 初期化
+
+    // カテゴリごとにまとめる
+    const templatesByCategory = data.items.reduce((acc, item) => {
+      if (!acc[item.category]) acc[item.category] = [];
+      acc[item.category].push(item);
+      return acc;
+    }, {});
+
+    // カテゴリごとにドロップダウン生成
+    Object.entries(templatesByCategory).forEach(([category, items]) => {
+      const label = document.createElement('h3');
+      label.textContent = category;
+      container.appendChild(label);
+
+      const dropdown = document.createElement('select');
+      dropdown.classList.add('template-dropdown');
+      dropdown.innerHTML = `<option value="">選択してください</option>`;
+
+      items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.description;
+        option.textContent = item.name;
+        dropdown.appendChild(option);
+      });
+      container.appendChild(dropdown);
+
+      // ドロップダウンが変更されたら、単一のフォームに改行で追記
+      dropdown.addEventListener('change', () => {
+        const singleInput = document.getElementById('singleDynamicInput');
+        if (!singleInput) return;
+        const selectedVal = dropdown.value.trim();
+        if (selectedVal) {
+          if (singleInput.value !== '') {
+            singleInput.value += '\n';
+          }
+          singleInput.value += selectedVal;
+        }
+      });
+    });
   }
 
-  // 編集フォームをリセット
-  dynamicForms.innerHTML = "";
+  // ドロップダウン初期化
+  function resetDropdowns() {
+    const dropdowns = document.querySelectorAll('.template-dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.value = '';
+    });
+    const singleInput = document.getElementById('singleDynamicInput');
+    if (singleInput) {
+      singleInput.value = '';
+    }
+  }
 
-  // ポップアップを表示
-  popup.classList.remove("hidden");
-}
+  // ポップアップを開く
+  function openPopup() {
+    // オーバーレイ表示
+    document.getElementById("popupOverlay").style.display = 'block';
+    document.getElementById("popup").style.display = 'block';
+  }
 
-// OKボタンの処理
-document.getElementById("ok-button").addEventListener("click", () => {
-  const selectedOption = dynamicDropdown.value; // ドロップダウンで選択された値
+  // OKボタン
+  function handleOkButton() {
+    if (!currentTemplate) return;
 
-  // 現在のテンプレートに data-txt を追加
-  if (currentTemplate) {
-    let existingDataTxt = currentTemplate.getAttribute("data-txt") || ""; // 既存の値を取得
-    
-    // 商品番号をランダム生成して挿入
+    let existingDataTxt = currentTemplate.getAttribute("data-txt") || "";
     if (existingDataTxt.includes("商品__")) {
       const randomProductNumber = generateRandomProductNumber();
-      existingDataTxt = existingDataTxt.replace("商品__", randomProductNumber); // プレースホルダーを置き換え
+      existingDataTxt = existingDataTxt.replace("商品__", randomProductNumber);
     }
 
-    // 「素材:」を探し、その2行下に追加
-    const lines = existingDataTxt.split("\n"); // 改行で分割
-    const index = lines.findIndex(line => line.trim() === "素材:"); // 「素材:」の行を探す
+    const singleInput = document.getElementById('singleDynamicInput');
+    const inputLines = singleInput.value.split('\n').map(line => line.trim()).filter(line => line);
 
-    if (index !== -1) {
-      // 「素材:」の2行下に追加
-      lines.splice(index + 2, 0, selectedOption);
-    } else {
-      // 「素材:」が見つからない場合、末尾に追加
-      lines.push("素材:", "", selectedOption);
-    }
+    const lines = existingDataTxt.split("\n");
+    const index = lines.findIndex(line => line.trim() === "素材:");
+    let insertPos = index + 2;
+    let addedMaterialBlock = false;
 
-    const updatedDataTxt = lines.join("\n"); // 配列を改行で結合
+    inputLines.forEach((val) => {
+      if (index !== -1) {
+        lines.splice(insertPos, 0, val);
+        insertPos++;
+      } else {
+        if (!addedMaterialBlock) {
+          lines.push("素材:", "");
+          addedMaterialBlock = true;
+        }
+        lines.push(val);
+      }
+    });
+
+    const updatedDataTxt = lines.join("\n");
     currentTemplate.setAttribute("data-txt", updatedDataTxt);
 
-    // オプションでテンプレート内に表示を更新
     const templateText = currentTemplate.querySelector("p");
     if (templateText) {
-      templateText.textContent = updatedDataTxt; // 挿入されたテキストを表示
+      templateText.textContent = updatedDataTxt;
     }
-  }
+    
 
-  // 元のポップアップを閉じ、新しいポップアップを表示
+  // ★★★ ここから追加（OKボタン押下後に入力とドロップダウンを初期化） ★★★
+  singleInput.value = '';      // .dynamic-input をクリア
+  resetDropdowns();            // ドロップダウンを初期値へ戻す
+  // ★★★ ここまで追加 ★★★
+
+  // ポップアップを閉じてコピー用ポップアップを表示
   closePopup();
   showCopyPopup();
-});
-
-// コピー用ポップアップを表示
-function showCopyPopup() {
-  copyPopup.classList.remove("hidden");
-
-  // タイトルcopyボタンの動作
-  document.getElementById("title-copy-button").addEventListener("click", () => {
-    const title = currentTemplate.querySelector("h3").textContent;
-    navigator.clipboard.writeText(title).then(() => {
-      alert("タイトルがコピーされました！");
-    });
-  });
-
-  // 説明copyボタンの動作
-  document.getElementById("description-copy-button").addEventListener("click", () => {
-    const description = currentTemplate.getAttribute("data-txt");
-    navigator.clipboard.writeText(description).then(() => {
-      alert("説明がコピーされました！");
-    });
-  });
 }
 
-// キャンセルボタンの処理
-document.getElementById("cancel-button").addEventListener("click", closePopup);
+  // 商品番号生成
+  function generateRandomProductNumber() {
+    const prefix = "商品__";
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let randomNumber;
+    do {
+      randomNumber =
+        prefix +
+        Array.from({ length: 3 }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+    } while (existingProductNumbers.has(randomNumber));
+    existingProductNumbers.add(randomNumber);
+    return randomNumber;
+  }
 
-// ポップアップを閉じる
-function closePopup() {
-  popup.classList.add("hidden");
-  copyPopup.classList.add("hidden"); // コピー用ポップアップも閉じる
-}
+  // コピー用ポップアップ表示
+  function showCopyPopup() {
+    document.getElementById("copyOverlay").style.display = 'block';
+    document.getElementById("copy-popup").style.display = 'block';
+  }
+
+  // コピー用ポップアップを閉じる
+  function closeCopyPopup() {
+    document.getElementById("copyOverlay").style.display = 'none';
+    document.getElementById("copy-popup").style.display = 'none';
+  }
+
+  // コピー後にテンプレート内容を初期化に近い状態に戻す
+  function updateTemplateContent() {
+    if (!currentTemplate) return;
+    let existingDataTxt = currentTemplate.getAttribute("data-txt") || "";
+    const lines = existingDataTxt.split("\n");
+  
+    // --- ここから修正 ---
+    // 「素材:」の行番号を取得
+    const startIndex = lines.findIndex((line) => line.trim() === "素材:");
+    // 「状態:」の行番号を取得
+    const endIndex = lines.findIndex((line) => line.trim() === "状態:");
+  
+    // 両方見つかった＆「状態:」行が「素材:」行より後にある場合のみ処理
+    if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+      // 「素材:」の次行から「状態:」直前までをすべて削除
+      lines.splice(startIndex + 1, endIndex - (startIndex + 1));
+      // 「素材:」の直後に空白行2行を追加
+      lines.splice(startIndex + 1, 0, "", "");
+    }
+    // --- ここまで修正 ---
+  
+    // 商品__ で始まる行を削除
+    const productLineIndex = lines.findIndex((line) => line.startsWith("商品__"));
+    if (productLineIndex !== -1) {
+      lines.splice(productLineIndex, 1);
+    }
+  
+    // 先頭に「商品__」を追加
+    lines.unshift("商品__");
+  
+    const updatedDataTxt = lines.join("\n");
+    currentTemplate.setAttribute("data-txt", updatedDataTxt);
+  
+    const templateText = currentTemplate.querySelector("p");
+    if (templateText) {
+      templateText.textContent = updatedDataTxt;
+    }
+  }
+  
+
+  // ポップアップを閉じる
+  function closePopup() {
+    document.getElementById("popupOverlay").style.display = 'none';
+    document.getElementById("popup").style.display = 'none';
+  }
