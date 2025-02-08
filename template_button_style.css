@@ -110,8 +110,8 @@ body {
 .template-item {
   position: relative;
   width: 100%;
-  padding-top: 100%;
-  /* 正方形を維持 */
+  height: 120px;
+  /* padding-top: 100%; */
   background-color: #fff;
   border: 1px solid #ddd;
   box-sizing: border-box;

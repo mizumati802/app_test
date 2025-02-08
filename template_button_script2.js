@@ -219,6 +219,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // 説明コピー
   document.getElementById("description-copy-button").addEventListener("click", () => {
     if (!currentTemplate) return;
+
+    // ▼ 先にOKボタンと同じ挿入処理を実行してからコピー
+    handleOkButton();
+
     // 行頭の空白を削除
     const description = (currentTemplate.getAttribute("data-txt") || "").replace(/^[ \t]+/gm, "");
     navigator.clipboard.writeText(description).then(() => {
@@ -354,11 +358,12 @@ function handleOkButton() {
   if (templateText) {
     templateText.textContent = updatedDataTxt;
   }
+
+  // 入力フォームを2秒間だけグリーンに
   singleInput.classList.add('bg_complete');
   setTimeout(() => {
     singleInput.classList.remove('bg_complete');
   }, 2000);
-  
 }
 
 // 商品番号生成
